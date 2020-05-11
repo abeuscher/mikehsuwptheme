@@ -1,0 +1,21 @@
+extends inc/page.pug
+block template
+  :php
+    /*
+    Template Name: Blogs Page Template
+    */
+block content
+  section.container.padding-top
+    :php
+      if( have_posts() ): while( have_posts() ): the_post();
+    article.row
+      .col-md-12.blog-links.content
+        h2 Postings & Publications
+        :php
+          $blogs = array_reverse(get_field('blog_entry'));
+          foreach($blogs as $key=>$blog) {
+            printf("<p><a class='blog-link' href='%s'>%s</a>; %s", $blog["url"], $blog["title"], $blog["citation"]);
+          }
+    :php
+      endwhile;
+      endif;

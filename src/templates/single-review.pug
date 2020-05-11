@@ -1,0 +1,84 @@
+extends inc/page.pug
+block template
+  :php
+    /*
+    Template Name: Product Review
+    Template Post Type: post
+    */
+block content
+    :php
+      $info = get_field("product_info");
+      $scores = get_field("scores");
+    article(role='article',itemprop='haspart',itemscope='',itemtype='http://schema.org/Article')
+      meta(itemscope='itemscope',itemprop='mainEntityOfPage',itemType='https://schema.org/WebPage')
+      section.article-header-block
+        .category-header
+          .content-wrapper
+            :php
+              printf("<h2>Product Review : %s", $info["product_type"]);
+        .review-header.bg-black
+          .content-wrapper
+            h1(itemprop='headline')
+                :php
+                    the_title();  
+            :php
+                printf("%s", get_field("short_review"));        
+      section.photos-block.bg-black
+        .content-wrapper
+          .gallery#review-carousel
+              :php
+                  foreach(get_field("photos") as $idx=>$photo) {
+                    printf("<div class='slide'><div class='inner'><div class='slide-image magnify' data-bg-array='%s'></div><button class='zoom-icon'><span class='fa fa-search-plus'></span>toggle zoom thingy</button></div></div>", json_encode($photo["image"], JSON_UNESCAPED_SLASHES));
+                  }      
+      section.product-meta-block.bg-dark-green
+        .content-wrapper
+          .product-meta
+            .data-block
+              :php
+                printf("<div class='data-point brand'><span class='label'>Brand</span><span class='value'>%s</span></div>", $info["brand"]);
+                printf("<div class='data-point product-type'><span class='label'>Strain</span><span class='value'>%s</span></div>", $info["strain"]);
+            .data-block
+              :php
+                printf("<div class='data-point price'><span class='label'>Price Point</span><span class='value'>%s ($%s / gram)</span></div>", $info["price"],  round((float)$info["cost"] / (float)$info["weight"], 2));
+                printf("<div class='data-point thc'><span class='label'>Listed THC</span><span class='value'>%s&#37;</span></div>", $info["listed_thc_percentage"]); 
+            .data-block
+              :php
+                printf("<div class='data-point package-date'><span class='label'>Packaged</span><span class='value'>%s</span></div>", $info["package_date"]); 
+                printf("<div class='data-point purchase-date'><span class='label'>Purchased</span><span class='value'>%s from %s</span></div>", $info["purchase_date"], $info["dispensary"]); 
+      section.article-main-block.padding-both
+        .content-wrapper(itemprop="articleBody")
+          :php
+            printf("%s", get_field("long_review"));   
+      section.product-scores-block.bg-green.padding-bottom   
+        .content-wrapper         
+          .product-scores
+            .data-score
+              span.label Strength : 
+              :php
+                printf("<span class='value'>%s/10</span>", $scores["strength"]);
+              .score-content
+                :php
+                  printf("<div class='notes'>%s</div>", $scores["strength_notes"]);
+            .data-score
+              span.label Taste : 
+              :php
+                printf("<span class='value'>%s/10</span>", $scores["taste"]);
+              .score-content
+                :php
+                  printf("<div class='notes'>%s</div>", $scores["taste_notes"]);
+            .data-score
+              span.label Appearance : 
+              :php
+                printf("<span class='value'>%s/10</span>", $scores["quality"]);
+              .score-content
+                :php
+                  printf("<div class='notes'>%s</div>", $scores["quality_notes"]);
+            .data-final
+              span.label Overall Score : 
+              :php
+                printf("<span class='value'>%s/30</span>", intval($scores["strength"]) + intval($scores["taste"]) + intval($scores["quality"]));
+              .score-content
+                :php
+                  printf("<div class='notes'>%s</div>", $scores["overall_notes"]);
+
+    

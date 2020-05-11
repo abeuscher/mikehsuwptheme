@@ -1,0 +1,24 @@
+.modal-bucket
+    .modal-bg
+    .modal
+        a.modal-close(href="#")!="&times;"
+        .inner
+            .team-bio
+                .thumb
+                    img(src=locals.thumb.url)
+                .bio
+                    h2=locals.first_name + " " + locals.last_name
+                    p=locals.bio
+                ul.social-links
+                    if locals.linked_in_url!=""
+                        li
+                            a(href=locals.linked_in_url, target="_blank")
+                                span.fa.fab.fa-linkedin
+                    if locals.github_profile_url!=""
+                        li
+                            a(href=locals.github_profile_url, target="_blank")
+                                span.fa.fab.fa-github
+                    if locals.home_url!=""
+                        li
+                            a(href=locals.home_url, target="_blank")
+                                span.fa.fab.fa-home

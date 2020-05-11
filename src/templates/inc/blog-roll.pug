@@ -1,0 +1,23 @@
+:php
+    $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' )  : 1;
+    $count = 0;
+    $page_object = get_queried_object();
+    $query = new WP_Query( array('post_type' => 'post','paged' => $paged,'posts_per_page' => 9,'orderby'=>'post_date','ignore_sticky_posts'=>1,'post_status'=>'publish') );
+    if( $query->have_posts() ) {
+        while( $query->have_posts() ) {
+            $query->the_post();
+            $post_tags = get_the_tags();
+            $tags = "";
+            if ($post_tags) {
+                foreach($post_tags as $key=>$tag) {
+                $tags .= sprintf("<a href='/tag/%s'>%s</a> | ", $tag->slug,$tag->name);
+                }
+                $tags = rtrim($tags,"| ");
+            }
+            $thumb = get_field("social_share_image") ? get_field("social_share_image") : get_the_post_thumbnail_url();
+            printf("<a class='blog-thumb' href='%s'><article class='inner'><div class='thumb' data-bg='%s'></div><div class='content'><h2>%s</h2></div><div class='post-date'>%s</div></article></a>",  get_the_permalink(), get_field("page_thumb"),get_the_title(), get_the_date( 'm/d/Y' ));
+        }}
+:php
+    if ($query->max_num_pages>1) {
+        printf("<a class='button' id='more-posts' href='#page-2'>MORE</a>");
+    }

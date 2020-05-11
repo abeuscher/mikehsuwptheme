@@ -1,0 +1,16 @@
+extends inc/page.pug
+block template
+  :php
+    /*
+    Template Name: Default Page Template
+    */
+block content
+    article.padding-both
+        section.article-main-block
+            .content-wrapper
+                h1
+                    :php
+                        the_title();
+                :php
+                    the_content();
+

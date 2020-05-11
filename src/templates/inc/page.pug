@@ -1,0 +1,42 @@
+block template
+- var themeDir = "/wp-content/themes/dispensaryadventures/"
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='robots', content='noindex')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(property="og:locale",content="en_US")
+    meta(property="og:site_name",content="HIEOfOne")
+    link(rel='shortcut icon', href=themeDir + 'images/favicon.ico?v=2') 
+    link(rel='apple-touch-icon', sizes='180x180', href=themeDir + 'images/apple-touch-icon.png')
+    link(rel='icon', type='image/png', sizes='32x32', href=themeDir + 'images/favicon-32x32.png')
+    link(rel='icon', type='image/png', sizes='16x16', href=themeDir + 'images/favicon-16x16.png')
+    link(rel="stylesheet",href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Luckiest+Guy")
+    :php
+      global $wp_query;
+      $postid = $wp_query->post->ID;
+      $title = get_field("meta_title") ? get_field("meta_title") : get_the_title();
+      $description = get_field("meta_description") ? get_field("meta_description") : get_the_excerpt();
+      $featued_image = get_field("page_thumb");
+      wp_reset_query();
+      $link = get_the_permalink();
+      echo "<title>$title | Dispensary Adventures</title>";
+      echo "<meta name='description' content='".$description."' />".
+           "<meta property='og:title' content='$title' />".
+           "<meta property='og:url' content='$link' />".
+           "<meta property='og:description' content='$description' />".
+           "<meta property='og:image' content='$featured_image' />".
+           "<meta name='twitter:title' content='$title' />".
+           "<meta name='twitter:description' content='$description' />".
+           "<meta name='twitter:image' content='$featured_image' />";
+      $slink = get_template_directory_uri() . "/style.css";
+      echo "<link href='$slink' rel='stylesheet' />";
+  body
+    #wrapper
+      include ./header.pug
+      block content
+      include ./footer.pug
+      script(src=themeDir + "js/bundle.min.js")
+    block modals

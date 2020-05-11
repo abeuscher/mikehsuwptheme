@@ -1,0 +1,17 @@
+ul.social-share
+    li
+        :php
+            echo "<a href='https://www.facebook.com/sharer/sharer.php?u=".urlencode(get_permalink())."' target='_blank'>";
+        span.fa-1x.fa-stack
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-stack-1x.fa-inverse.fa-facebook
+        :php
+            echo "</a>";
+    li
+        :php
+            echo "<a href='https://twitter.com/intent/tweet?text=".urlencode(get_the_title()." by ".get_author_name())."&url=".urlencode(get_permalink())."' target='_blank'>";
+        span.fa-1x.fa-stack
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-stack-1x.fa-inverse.fa-twitter
+        :php
+            echo "</a>";

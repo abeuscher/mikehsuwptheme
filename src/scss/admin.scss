@@ -1,0 +1,16 @@
+@import "./_variables.scss";
+body {
+  font-family:$body-font;
+  h1, h2, h3, h4, h5, h6 {
+    font-family:$header-font;
+  }
+}
+#login {
+  h1 {
+    a {
+      width:auto;
+      background-image:url("/wp-content/themes/hieofone/images/logo-header.png");
+      background-size:contain;
+    }
+  }
+}
