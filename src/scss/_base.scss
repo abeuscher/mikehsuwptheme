@@ -23,6 +23,11 @@ h2 {
   margin-bottom:$gutter-width;
   font-size:2.4em;
 }
+main {
+  @include bp(m) {
+    min-height:80vh;
+  }
+}
 .wysiwyg {
   font-size:1.4em;
   line-height:2.4;

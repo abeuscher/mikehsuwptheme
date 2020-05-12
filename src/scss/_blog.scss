@@ -74,4 +74,19 @@ section.blog-roll {
         .wysiwyg {
             margin:$gutter-width*3 0 $gutter-width;
         }
+        .social-share {
+            list-style:none;
+            display:block;
+            padding:0;
+            text-align: center;
+            a {
+                display:flex;
+                align-items:center;
+                position:relative;
+            }
+            li {
+                display:inline-block;
+                padding:0 $gutter-width;
+            }
+        }
 }

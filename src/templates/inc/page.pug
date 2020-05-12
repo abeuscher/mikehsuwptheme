@@ -8,6 +8,7 @@ html
     meta(name='robots', content='noindex')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(property="og:locale",content="en_US")
+    meta(property="og:type",content="website")
     meta(property="og:site_name",content="mikehsu.work")
     meta(property="twitter:card",content="summary")
     meta(property="twitter:site",content="mikehsuaaf")
@@ -49,7 +50,8 @@ html
   body
     #wrapper
       include ./header.pug
-      block content
+      main
+        block content
       include ./footer.pug
       script(src=themeDir + "js/bundle.min.js")
     block modals

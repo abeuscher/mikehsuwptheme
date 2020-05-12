@@ -6,11 +6,13 @@ body {
     font-family:$header-font;
   }
 }
-#login {
+#login, .login {
   h1 {
+    width:100%;
     a {
-      width:auto;
-      background-image:url("/wp-content/themes/hieofone/images/logo-header.png");
+      width:100%;
+      min-height:200px;
+      background-image:url($local-path+"/images/logo-header.jpg");
       background-size:contain;
     }
   }
