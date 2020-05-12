@@ -5,31 +5,7 @@ block template
     Template Name: Single Blog Entry Template
     */
 block content
-  article(role='article',itemprop='haspart',itemscope='',itemtype='http://schema.org/Article')
+  article.blog-post(role='article',itemprop='haspart',itemscope='',itemtype='http://schema.org/Article')
     meta(itemscope='itemscope',itemprop='mainEntityOfPage',itemType='https://schema.org/WebPage')
-    section.article-header-block
-      .category-header
-        .content-wrapper
-          h2 Blog Post
-      .content-wrapper
-        h1(itemprop='headline')
-          :php
-            echo get_the_title();
-        .date
-          :php
-            echo get_the_date( 'M d, Y' );
-    section.article-main-block.padding-bottom
-      .content-wrapper(itemprop="articleBody")                
-        :php
-          the_content();    
     :php
-      if (get_field("photos")!="") {
-    section.photos-block.bg-black
-      .content-wrapper
-        .gallery#review-carousel
-            :php
-                foreach(get_field("photos") as $idx=>$photo) {
-                  printf("<div class='slide'><div class='inner'><div class='slide-image magnify' data-bg-array='%s'></div><button class='zoom-icon'><span class='fa fa-search-plus'></span>toggle zoom thingy</button></div></div>", json_encode($photo["image"], JSON_UNESCAPED_SLASHES));
-                }               
-    :php
-      }
+      printf("<div class='thumb' data-bg='%s'></div><h1 itemprop='headline'>%s</h1><div class='date'>%s</div><div class='wysiwyg' itemprop='articleBody'>%s</div>",get_post_meta(get_the_id(),"_social_image_url")[0],get_the_title(), get_the_date(), get_the_content());

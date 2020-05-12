@@ -13,3 +13,23 @@ h6 {
   margin: 0;
   font-family: $header-font;
 }
+a {
+  color:$body-link-color;
+  &:hover {
+    color:$body-link-hover-color;
+  }
+}
+h2 {
+  margin-bottom:$gutter-width;
+  font-size:2.4em;
+}
+.wysiwyg {
+  font-size:1.4em;
+  line-height:2.4;
+  a {
+    text-decoration:none;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
+}

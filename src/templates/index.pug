@@ -5,12 +5,8 @@ block template
     Template Name: Default Page Template
     */
 block content
-    article.padding-both
-        section.article-main-block
-            .content-wrapper
-                h1
-                    :php
-                        the_title();
-                :php
-                    the_content();
+    section.content
+        .inner.max-width
+            :php
+                printf("<h1>%s</h1><div class='wysiwyg'>%s</div>",get_the_title(),get_the_content());
 

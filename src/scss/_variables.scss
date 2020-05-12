@@ -8,6 +8,7 @@ $font-path:$local-path+"fonts/";
 $bps: (xs: 0, s:641px, m:1025px, l:1201px,xl:1921px);
 
 $gutter-width:25px;
+$max-width:1280px;
 
 //color-values
 $white:#ffffff;
@@ -16,7 +17,7 @@ $off-black:#4a4a4a;
 $off-white:#f3f3f3;
 $gray:#333;
 $light-gray:#ccc;
-$blue:blue;
+$blue:#0C3D87;
 $red:red;
 
 //fonts
@@ -28,7 +29,7 @@ $nav-font:'Droid Sans', sans-serif;
 $body-bg-color:$white; 
 $body-text-color:$black;
 $body-link-color:$blue;
-$body-link-hover-color:darken($blue,20%);
+$body-link-hover-color:darken($blue,40%);
 
 $local-path:"/wp-content/themes/mikehsu/";
 $img-path:$local-path+"images/";

@@ -22,32 +22,32 @@ block content
     }
   main
     section.about
-      .inner
         :php
-          echo blurb($about["header"],$about["content"]);
-    section.audio
+          printf("<div class='hero'><div class='bg desktop' data-bg-array='%s'></div><div class='bg mobile' data-bg-array='%s'></div><div class='about-blurb'>%s</div></div>", json_encode($about["background_image"], JSON_UNESCAPED_SLASHES),json_encode($about["background_image_mobile"], JSON_UNESCAPED_SLASHES), blurb($about["header"],$about["content"]))
+    section.audio.padded
       .inner
         :php
           echo blurb($audio["section_header"],$audio["section_copy"]);
-        .item-gallery.audio
+        .item-gallery.audio.padded
           :php
             foreach($audio["audio_items"] as $idx=>$item) {
-              printf("<div class='item'><div class='title'>%s</div><div class='description'>%s</div><div class='player'>%s</div></div>",$item["title"],$item["description"],$item["embed_code"]);
+              printf("<div class='item'><div class='title'>%s</div><input type='checkbox' name='audio-check-%s' id='audio-check-%s' /><label class='description' for='audio-check-%s'>%s</label><div class='player audio'>%s</div></div>",$item["title"],$idx,$idx,$idx,$item["description"],$item["embed_code"]);
             }
-    section.video
+    section.video.padded
       .inner
         :php
           echo blurb($video["section_header"],"");    
-      .item-gallery.audio
+        .item-gallery.audio
+          :php
+            foreach($video["videos"] as $idx=>$item) {
+              printf("<div class='item'><div class='title'>%s</div><div class='player video'>%s</div></div>",$item["title"],$item["embed_code"]);
+            }
+    section.photos.padded
+      .inner
         :php
-          foreach($video["videos"] as $idx=>$item) {
-            printf("<div class='item'><div class='title'>%s</div><div class='player'>%s</div></div>",$item["title"],$item["embed_code"]);
-          }
-    section.photos
-      :php
-        echo blurb($photos["section_header"],$photos["section_copy"]);
-      .item-gallery.photos
-        :php
-          foreach($photos["photos"] as $idx=>$item) {
-            printf("<div class='item photo'><div class='thumb' data-bg-array='%s'><div class='caption'>%s</div></div>",json_encode($item["photo"],JSON_UNESCAPED_SLASHES),$item["caption"]);
-          }
+          echo blurb($photos["section_header"],$photos["section_copy"]);
+        .photo-gallery.photos#photo-gallery
+          :php
+            foreach($photos["photos"] as $idx=>$item) {
+              printf("<div class='item photo'><div class='thumb' data-bg-array='%s'><div class='caption'>%s</div></div></div>",json_encode($item["photo"],JSON_UNESCAPED_SLASHES),$item["caption"]);
+            }

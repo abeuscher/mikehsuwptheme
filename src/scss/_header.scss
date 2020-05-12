@@ -1,0 +1,57 @@
+.page-header {
+    background:$black;
+    color:$white;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    padding:$gutter-width;
+    .logo {
+        flex-basis:100%;
+        text-align:center;
+        h1 {
+            color:$white;
+        }
+        @include bp(m) {
+            flex-basis:50%;
+            text-align: left;
+        }        
+    }
+    nav {
+        flex-basis:100%;
+        text-align:center;
+        ul {
+            list-style:none;
+            display:inline-block;
+            margin:0;
+            padding:0;
+            li {
+                display:inline-block;
+                margin-left:1em;
+                
+            }
+        }
+        @include bp(m) {
+            flex-basis:50%;
+            text-align:right;
+        }
+    }
+    a {
+        text-decoration:none;
+        color:$white;
+        position:relative;
+        .drop {
+            max-height:0;
+            padding:0 1em;
+            overflow:hidden;
+            position:absolute;
+            background:$off-black;
+            color:$white;
+            a {
+                color:$white;
+            }
+        }
+        &:hover {
+            color:$off-white;
+        }
+    }
+}
