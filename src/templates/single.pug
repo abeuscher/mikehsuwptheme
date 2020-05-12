@@ -18,6 +18,10 @@ block content
         .date
           :php
             echo get_the_date( 'M d, Y' );
+    section.article-main-block.padding-bottom
+      .content-wrapper(itemprop="articleBody")                
+        :php
+          the_content();    
     :php
       if (get_field("photos")!="") {
     section.photos-block.bg-black
@@ -29,7 +33,3 @@ block content
                 }               
     :php
       }
-    section.article-main-block.padding-bottom
-      .content-wrapper(itemprop="articleBody")                
-        :php
-          the_content();

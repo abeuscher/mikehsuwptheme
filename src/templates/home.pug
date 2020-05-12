@@ -6,35 +6,48 @@ block template
     */
 block content
   :php
-    $blurb = get_field("intro_blurb");
-  article
-    .content-wrapper.padding-top
-      :php
-        echo $blurb;
-    .content-wrapper.padding-bottom
-      .home-blogroll#post-bucket
+    $about = get_field("about_section");
+    $audio = get_field("audio_work");
+    $video = get_field("video_work");
+    $photos = get_field("photos");
+    function blurb($header,$content) {
+      $output="";
+      if ($header!="") {
+        $output .= sprintf("<h2>%s</h2>",$header);
+      }      
+      if ($content!="") {
+        $output .= sprintf("<div class='wysiwyg'>%s</div>",$content);
+      }    
+      return $output;  
+    }
+  main
+    section.about
+      .inner
         :php
-            $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' )  : 1;
-            $count = 0;
-            $page_object = get_queried_object();
-            $query = new WP_Query( array('post_type' => 'post','paged' => $paged,'posts_per_page' => 9,'orderby'=>'post_date','ignore_sticky_posts'=>1,'post_status'=>'publish') );
-            if( $query->have_posts() ) {
-                while( $query->have_posts() ) {
-                    $query->the_post();
-                    $post_tags = get_the_tags();
-                    $tags = "";
-                    if ($post_tags) {
-                        foreach($post_tags as $key=>$tag) {
-                        $tags .= sprintf("<a href='/tag/%s'>%s</a> | ", $tag->slug,$tag->name);
-                        }
-                        $tags = rtrim($tags,"| ");
-                    }
-                    $thumb = get_field("social_share_image") ? get_field("social_share_image") : get_the_post_thumbnail_url();
-                    printf("<a class='blog-thumb' href='%s'><article class='inner'><div class='thumb' data-bg='%s'></div><div class='content'><h2>%s</h2></div><div class='post-date'>%s</div></article></a>",  get_the_permalink(), get_field("page_thumb"),get_the_title(), get_the_date( 'm/d/Y' ));
-                }}
-      .home-more-button
+          echo blurb($about["header"],$about["content"]);
+    section.audio
+      .inner
         :php
-            if ($query->max_num_pages>1) {
-                printf("<a class='button' id='more-posts' href='#page-2' data-max-pages='%s'>MORE</a>", $query->max_num_pages);
+          echo blurb($audio["section_header"],$audio["section_copy"]);
+        .item-gallery.audio
+          :php
+            foreach($audio["audio_items"] as $idx=>$item) {
+              printf("<div class='item'><div class='title'>%s</div><div class='description'>%s</div><div class='player'>%s</div></div>",$item["title"],$item["description"],$item["embed_code"]);
             }
-
+    section.video
+      .inner
+        :php
+          echo blurb($video["section_header"],"");    
+      .item-gallery.audio
+        :php
+          foreach($video["videos"] as $idx=>$item) {
+            printf("<div class='item'><div class='title'>%s</div><div class='player'>%s</div></div>",$item["title"],$item["embed_code"]);
+          }
+    section.photos
+      :php
+        echo blurb($photos["section_header"],$photos["section_copy"]);
+      .item-gallery.photos
+        :php
+          foreach($photos["photos"] as $idx=>$item) {
+            printf("<div class='item photo'><div class='thumb' data-bg-array='%s'><div class='caption'>%s</div></div>",json_encode($item["photo"],JSON_UNESCAPED_SLASHES),$item["caption"]);
+          }

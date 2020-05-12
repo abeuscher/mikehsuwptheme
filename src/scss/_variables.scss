@@ -16,24 +16,20 @@ $off-black:#4a4a4a;
 $off-white:#f3f3f3;
 $gray:#333;
 $light-gray:#ccc;
-$green:#7AB317;
-$bright-green:#51BA2F;
-$dark-green:#789048;
-$darker-green:#1b4201;
-$pale-green:#9ed27b; 
-$yellow:yellow;
+$blue:blue;
+$red:red;
 
 //fonts
-$body-font:'Open Sans', serif;
-$header-font:'Open Sans', sans-serif;
-$nav-font:'Luckiest Guy', sans-serif;
+$body-font:'Droid Sans', serif;
+$header-font:'Fjalla One', sans-serif;
+$nav-font:'Droid Sans', sans-serif;
 
 //colors
 $body-bg-color:$white; 
 $body-text-color:$black;
-$body-link-color:$off-black;
-$body-link-hover-color:$dark-green;
+$body-link-color:$blue;
+$body-link-hover-color:darken($blue,20%);
 
-$local-path:"/wp-content/themes/dispensaryadventures/";
+$local-path:"/wp-content/themes/mikehsu/";
 $img-path:$local-path+"images/";
 $font-path:$local-path+"fonts/";

@@ -7,16 +7,25 @@ Description: Theme for Mike Hsu's Online Portfolio.
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: www.dispensaryadventures.com
+Text Domain: www.mikehsu.work
 */
-@import "./_normalize.scss";
-@import "./_variables.scss";
-@import "./_sass-mixins.scss";
+
+// Libraries and Settings
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Droid+Sans&display=swap');
+@import "./normalize";
+@import "./variables";
+@import "./sass-mixins";
+
+// Third Party
 $fa-font-path: $font-path;
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
-@import "./_footer.scss";
-@import "./_header.scss";
-@import "./_home.scss";
-@import "./_single-review.scss";
-@import "./_buttons.scss";
-@import "./_base.scss";
+@import "./flickity";
+
+// Site Parts
+@import "./base";
+@import "./footer";
+@import "./header";
+@import "./buttons";
+
+// Template Specific
+@import "./home";
