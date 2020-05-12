@@ -59,7 +59,7 @@ function buildTemplate(t) {
   src(t.srcDir + "*.pug")
     .pipe(
       pug({
-        pretty: true,
+        pretty: false,
         filters: {
           php: pugPhpFilter
         },

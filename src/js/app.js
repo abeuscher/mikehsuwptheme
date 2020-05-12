@@ -34,7 +34,4 @@ var siteActions = [{
 }, {
   "element": "[data-bg-array]",
   "action": require("./utils/data-bg-array")
-}, {
-  "element": "#more-posts",
-  "action": require("./get-posts/")
 }];
