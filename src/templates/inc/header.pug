@@ -1,14 +1,32 @@
-
+:php
+      global $wp_query;
+     query_posts(array(
+         'post_type' => 'sitesetting',
+         'nopaging' => true,
+         'posts_per_page' => 1
+     ));
+     $customers = [];
+     while(have_posts()) : the_post();
+        $header = get_field("header");
+        $footer = get_field("footer");
+     endwhile;
+     wp_reset_query();
 header.page-header#page-header
-  .logo
-    a(href="/")
-      h1 Mike Hsu
-      .drop
-        p email@email.com
-        p 617 555.1212
-  nav
-    ul
-      li
-        a.btn-about(href="/blog/") blog
-      li
-        a.btn-about(href="/contact/") contact
+    :php
+      function social_link($target,$iconclass) {
+        return sprintf("<a href='%s'><span class='fa-1x fa-stack'></span><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-stack-1x fa-inverse fa-%s'></i></a>",$target,$iconclass);
+      }
+      $socialmenu = "";
+      if ($header["facebook_link"]!="") {
+        $socialmenu .= social_link($header["facebook_link"],"facebook");
+      }
+      if ($header["twitter_link"]!="") {
+        $socialmenu .= social_link($header["twitter_link"],"twitter");
+      }
+      if ($header["instagram_link"]!="") {
+        $socialmenu .= social_link($header["instagram_link"],"instagram");
+      }
+      foreach($header["menu_links"] as $link) {
+        $nav .= sprintf("<li><a href='%s'>%s</a></li>",$link["link"],$link["display_text"]);
+      }
+      printf("<div class='logo'><a href='/'><h1>%s</h1></a><div class='header-social'>%s</div></div><nav><ul>%s</ul></nav>",$header["logo_text"],$socialmenu,$nav);

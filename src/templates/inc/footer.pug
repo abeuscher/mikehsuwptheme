@@ -1,3 +1,4 @@
 footer.flex.centered
     .col-wide
-        p!="&copy; 2020 Mike Hsu. All rights reserved."
+        :php
+            printf("<p>%s</p>",$footer["copyright_text"]);
